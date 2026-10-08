@@ -175,3 +175,33 @@ body{overflow-x:hidden}
 /* Celoplošná poptávka pod třemi kroky */
 .steps-cta{display:flex;align-items:center;justify-content:center;width:100%;min-height:54px;margin-top:16px;padding:10px 24px;border-radius:18px;background:var(--lime);color:var(--ink);font-size:18px;font-weight:850;line-height:1.2;text-align:center;box-shadow:0 0 32px rgba(198,255,61,.34);transition:background .2s ease,box-shadow .2s ease}
 .steps-cta:hover{background:var(--text);color:var(--ink);box-shadow:0 0 42px rgba(198,255,61,.52)}
+
+/* O nás – nová značka, zkušené zázemí */
+#onas,#realizace{scroll-margin-top:36px}
+.about-section{position:relative}
+.about-layout{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr);gap:clamp(40px,6vw,100px);align-items:start}
+.about-layout h2{font-size:clamp(52px,6.8vw,100px);line-height:.95}
+.about-highlight{color:var(--lime)}
+.about-copy{padding-top:8px}
+.about-copy p{font-size:18px;line-height:1.65;color:var(--soft);margin:0 0 22px}
+.about-copy .about-lead{color:var(--text);font-size:clamp(22px,2.8vw,32px);font-weight:750;line-height:1.28;margin-bottom:28px}
+.about-copy .btn{margin-top:12px}
+.about-values{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:28px;margin-top:70px;border-top:1px solid var(--line)}
+.about-values>div{padding-top:26px;display:flex;flex-direction:column;gap:12px}
+.about-values span{font-size:12px;color:var(--lime)}
+.about-values strong{font-size:clamp(20px,2.2vw,30px);line-height:1.15}
+.references-head{margin-bottom:44px}
+.references-lead{font-size:21px;color:var(--soft);line-height:1.5;max-width:760px;margin:28px 0 0}
+.references-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+.reference-card{position:relative;min-height:285px;padding:30px;border-radius:28px;display:flex;flex-direction:column;align-items:flex-start;overflow:hidden}
+.reference-kind{font-size:11px;letter-spacing:.07em;opacity:.72;line-height:1.5}
+.reference-card h3{font-stretch:62%;font-size:clamp(30px,3.5vw,48px);font-weight:900;line-height:1;text-transform:uppercase;margin:auto 0 15px;overflow-wrap:break-word}
+.reference-card p{font-size:15px;line-height:1.5;opacity:.82;margin:0}
+.reference-lime{background:var(--lime);color:var(--ink)}
+.reference-pink{background:var(--pink);color:var(--ink)}
+.reference-paper{background:var(--text);color:var(--ink)}
+.reference-dark{background:radial-gradient(circle at 100% 0,rgba(198,255,61,.12),transparent 55%),var(--surface);color:var(--text);border:1px solid var(--line)}
+.references-note{max-width:890px;color:var(--muted);font-size:14px;line-height:1.7;margin:28px 0 0}
+.references-note a{text-decoration:underline;text-underline-offset:3px}
+@media(max-width:980px){.about-layout{grid-template-columns:1fr;gap:36px}.references-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.about-layout h2{font-size:clamp(48px,9vw,86px)}}
+@media(max-width:620px){.about-values,.references-grid{grid-template-columns:1fr}.about-values{gap:0;margin-top:46px}.about-values>div{border-bottom:1px solid var(--line);padding-bottom:24px}.reference-card{min-height:220px;padding:26px}.reference-card h3{font-size:clamp(32px,9vw,46px)}.references-lead{font-size:18px}}
