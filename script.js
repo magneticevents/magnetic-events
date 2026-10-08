@@ -3,13 +3,13 @@ var CONFIG = {
   // Adresa formuláře z Formspree
   formEndpoint: 'https://formspree.io/f/xqpepgre',
   // Záložní e-mail, když formulář selže
-  fallbackEmail: 'info@magforce.cz',
+  fallbackEmail: 'poptavky@magneticevents.cz',
   // Kontakty zobrazené na webu
   firma: 'Tomáš Wolf',
   ico: '08817740',
   adresa: 'Krásná 239, 739 04 Krásná',
   tel: '+420 777 781 315',
-  email: 'info@magforce.cz'
+  email: 'poptavky@magneticevents.cz'
 };
 
 // vyplnění kontaktů na všech stránkách
