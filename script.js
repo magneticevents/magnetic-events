@@ -11,7 +11,6 @@ var CONFIG = {
   tel: '+420 777 781 315',
   email: 'info@magforce.cz'
 };
-};
 
 // vyplnění kontaktů na všech stránkách
 (function () {
