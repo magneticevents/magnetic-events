@@ -73,3 +73,29 @@ var CONFIG = {
     }
   });
 })();
+
+// Kontaktní formulář
+(function () {
+  var form = document.getElementById('kontakt');
+  if (!form) return;
+  var error = document.getElementById('kontakt-error');
+  form.addEventListener('submit', function (event) {
+    event.preventDefault();
+    error.hidden = true;
+    if (form.elements._gotcha.value || !form.reportValidity()) return;
+    var button = form.querySelector('button[type="submit"]');
+    button.disabled = true;
+    button.textContent = 'Odesílání…';
+    fetch(CONFIG.formEndpoint, {
+      method: 'POST', headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+      body: JSON.stringify({ 'Jméno': form.elements.jmeno.value.trim(), email: form.elements.email.value.trim(), 'Telefon': form.elements.telefon.value.trim(), message: form.elements.zprava.value.trim(), _subject: 'Kontaktní zpráva z webu Magnetic Events', _replyto: form.elements.email.value.trim() })
+    }).then(function (response) {
+      if (!response.ok) throw new Error('Odeslání selhalo');
+      form.hidden = true;
+      document.getElementById('kontakt-done').hidden = false;
+    }).catch(function () {
+      error.textContent = 'Zprávu se nepodařilo odeslat. Zkuste to znovu nebo napište na ' + CONFIG.fallbackEmail + '.';
+      error.hidden = false;
+    }).finally(function () { button.disabled = false; button.textContent = 'Odeslat zprávu'; });
+  });
+})();
