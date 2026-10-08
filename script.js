@@ -8,7 +8,6 @@ var CONFIG = {
   firma: 'Tomáš Wolf',
   ico: '08817740',
   adresa: 'Krásná 239, 739 04 Krásná',
-  tel: '+420 777 781 315',
   email: 'poptavky@magneticevents.cz'
 };
 
@@ -55,7 +54,7 @@ var CONFIG = {
     var data = {
       'Datum akce': form.datum.value, 'Počet hostů': form.hosti.value, 'Místo': form.misto.value,
       'Typ akce': (form.querySelector('input[name=typ]:checked') || {}).value || '',
-      'Potřebuje': potreba, 'Jméno': form.jmeno.value, 'Telefon': form.telefon.value,
+      'Potřebuje': potreba, 'Jméno': form.jmeno.value,
       'E-mail': form.email.value, 'Zpráva': form.zprava.value,
       _subject: 'Poptávka z webu Magnetic Events', _replyto: form.email.value
     };
@@ -88,7 +87,7 @@ var CONFIG = {
     button.textContent = 'Odesílání…';
     fetch(CONFIG.formEndpoint, {
       method: 'POST', headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
-      body: JSON.stringify({ 'Jméno': form.elements.jmeno.value.trim(), email: form.elements.email.value.trim(), 'Telefon': form.elements.telefon.value.trim(), message: form.elements.zprava.value.trim(), _subject: 'Kontaktní zpráva z webu Magnetic Events', _replyto: form.elements.email.value.trim() })
+      body: JSON.stringify({ 'Jméno': form.elements.jmeno.value.trim(), email: form.elements.email.value.trim(), message: form.elements.zprava.value.trim(), _subject: 'Kontaktní zpráva z webu Magnetic Events', _replyto: form.elements.email.value.trim() })
     }).then(function (response) {
       if (!response.ok) throw new Error('Odeslání selhalo');
       form.hidden = true;
