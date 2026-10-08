@@ -1,15 +1,16 @@
 /* ===== NASTAVENÍ ===== */
 var CONFIG = {
-  // Adresa formuláře z Formspree nebo Web3Forms (viz návod). Dokud je prázdná, odeslání otevře e-mailový program.
-  formEndpoint: '',
-  // E-mail, na který mají chodit poptávky (záložní varianta bez služby)
+  // Adresa formuláře z Formspree
+  formEndpoint: 'https://formspree.io/f/xqpepgre',
+  // Záložní e-mail, když formulář selže
   fallbackEmail: 'info@magforce.cz',
-  // Kontakty zobrazené na webu. Prázdné pole = zůstane hranatá závorka.
-  firma: '',
-  ico: '',
-  adresa: '',
-  tel: '',
+  // Kontakty zobrazené na webu
+  firma: 'Tomáš Wolf',
+  ico: '08817740',
+  adresa: 'Krásná 239, 739 04 Krásná',
+  tel: '+420 777 781 315',
   email: 'info@magforce.cz'
+};
 };
 
 // vyplnění kontaktů na všech stránkách
