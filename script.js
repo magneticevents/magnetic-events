@@ -77,6 +77,9 @@ var CONFIG = {
 (function () {
   var form = document.getElementById('kontakt');
   if (!form) return;
+  var service = new URLSearchParams(location.search).get('sluzba');
+  var subjects = { cisteni: 'Mám zájem o čištění stanu u vašeho partnera.', koncept: 'Mám zájem o návrh tématu a stylu akce.', vizualizace: 'Mám zájem o vizuální návrh akce.', grafika: 'Mám zájem o grafiku pro akci.' };
+  if (subjects[service]) form.elements.zprava.value = subjects[service] + '\n\n';
   var error = document.getElementById('kontakt-error');
   form.addEventListener('submit', function (event) {
     event.preventDefault();
