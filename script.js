@@ -98,6 +98,7 @@ var CONFIG = {
       body: JSON.stringify(data)
     }).then(function (response) {
       if (!response.ok) throw new Error('Odeslání selhalo');
+      if (window.MagneticAnalytics) window.MagneticAnalytics.trackFormSuccess('poptavka');
       form.hidden = true;
       done.hidden = false;
       done.scrollIntoView({ behavior: 'smooth', block: 'center' });
@@ -130,6 +131,7 @@ var CONFIG = {
       body: JSON.stringify({ 'Jméno': form.elements.jmeno.value.trim(), email: form.elements.email.value.trim(), message: form.elements.zprava.value.trim(), _subject: 'Kontaktní zpráva z webu Magnetic Events', _replyto: form.elements.email.value.trim() })
     }).then(function (response) {
       if (!response.ok) throw new Error('Odeslání selhalo');
+      if (window.MagneticAnalytics) window.MagneticAnalytics.trackFormSuccess('kontakt');
       form.hidden = true;
       document.getElementById('kontakt-done').hidden = false;
     }).catch(function () {
