@@ -101,3 +101,26 @@ var CONFIG = {
     }).finally(function () { button.disabled = false; button.textContent = 'Odeslat zprávu'; });
   });
 })();
+
+// Mobilní navigace: zavření po výběru, mimo menu a klávesou Escape.
+(function () {
+  var menu = document.querySelector('.mobile-menu');
+  if (!menu) return;
+  var summary = menu.querySelector('summary');
+  menu.addEventListener('click', function (event) {
+    if (event.target.closest('a')) menu.open = false;
+  });
+  document.addEventListener('click', function (event) {
+    if (menu.open && !menu.contains(event.target)) menu.open = false;
+  });
+  document.addEventListener('keydown', function (event) {
+    if (event.key === 'Escape' && menu.open) {
+      menu.open = false;
+      summary.focus();
+    }
+  });
+  var desktop = window.matchMedia('(min-width: 821px)');
+  desktop.addEventListener('change', function (event) {
+    if (event.matches) menu.open = false;
+  });
+})();
