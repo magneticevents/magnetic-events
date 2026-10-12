@@ -19,13 +19,12 @@
     if (!menu.contains(event.target)) setOpen(false);
   }
   document.addEventListener('pointerdown', closeOutside);
-  document.addEventListener('click', closeOutside);
   document.addEventListener('keydown', function (event) {
     if (event.key === 'Escape' && toggle.getAttribute('aria-expanded') === 'true') {
       setOpen(false, true);
     }
   });
-  var desktop = window.matchMedia('(min-width: 821px)');
+  var desktop = window.matchMedia('(min-width: 1101px)');
   function onResize(event) { if (event.matches) setOpen(false); }
   if (desktop.addEventListener) desktop.addEventListener('change', onResize);
   else if (desktop.addListener) desktop.addListener(onResize);
@@ -58,52 +57,56 @@ var CONFIG = {
   if (!form) return;
   var err = document.getElementById('err');
   var done = document.getElementById('done');
-
-  // předvyplnění z odkazů (?datum=…&hosti=…&typ=…&vybaveni=…)
   var q = new URLSearchParams(location.search);
-  if (q.get('datum')) form.datum.value = q.get('datum');
-  if (q.get('hosti')) form.hosti.value = q.get('hosti');
-  var typ = q.get('typ');
-  if (typ) Array.prototype.forEach.call(form.querySelectorAll('input[name=typ]'), function (r) {
-    if (typ.toLowerCase().indexOf(r.value.split(' ')[0].toLowerCase().slice(0, 5)) === 0) r.checked = true;
-  });
-  var vyb = q.get('vybaveni');
-  if (vyb) form.zprava.value = 'Zajímá mě: ' + vyb;
-
+  var choice = (q.get('sluzba') || '').toLowerCase();
+  var chosen = {
+    event: 'Event Management', technika: 'Technická produkce',
+    kreativa: 'Kreativní služby', konzultace: 'Konzultace'
+  };
+  if (chosen[choice]) form.elements.sluzba.value = chosen[choice];
+  else if (q.get('vybaveni')) form.elements.sluzba.value = 'Technická produkce';
+  if (q.get('datum')) form.elements.datum.value = q.get('datum');
+  if (q.get('hosti')) form.elements.hosti.value = q.get('hosti');
+  var parts = [];
+  if (q.get('vybaveni')) parts.push('Zajímá mě: ' + q.get('vybaveni'));
+  if (q.get('typ')) parts.push('Typ akce: ' + q.get('typ'));
+  if (parts.length) form.elements.zprava.value = parts.join('\n');
+  if (q.get('datum') || q.get('hosti')) form.querySelector('.request-details').open = true;
   function show(msg) { err.textContent = msg; err.hidden = !msg; }
-
-  form.addEventListener('submit', function (e) {
-    e.preventDefault();
+  form.addEventListener('submit', function (event) {
+    event.preventDefault();
     show('');
-    if (form._gotcha.value) return; // spam
-    if (!form.datum.value || !form.hosti.value || !form.jmeno.value.trim() || !form.email.value.trim()) {
-      show('Vyplňte prosím datum, počet hostů, jméno a e-mail.');
-      return;
-    }
-    if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(form.email.value)) {
-      show('Zkontrolujte prosím e-mail.');
-      return;
-    }
-    var potreba = Array.prototype.map.call(form.querySelectorAll('input[name=potreba]:checked'), function (c) { return c.value; }).join(', ');
+    if (form.elements._gotcha.value || !form.reportValidity()) return;
     var data = {
-      'Datum akce': form.datum.value, 'Počet hostů': form.hosti.value, 'Místo': form.misto.value,
-      'Typ akce': (form.querySelector('input[name=typ]:checked') || {}).value || '',
-      'Potřebuje': potreba, 'Jméno': form.jmeno.value,
-      'E-mail': form.email.value.trim(), email: form.email.value.trim(), 'Zpráva': form.zprava.value,
-      _subject: 'Poptávka z webu Magnetic Events', _replyto: form.email.value
+      'Typ služby': form.elements.sluzba.value,
+      'Jméno a firma': form.elements.jmeno.value.trim(),
+      'E-mail': form.elements.email.value.trim(),
+      'Zadání': form.elements.zprava.value.trim(),
+      'Datum akce': form.elements.datum.value,
+      'Počet hostů': form.elements.hosti.value,
+      'Místo konání': form.elements.misto.value.trim(),
+      email: form.elements.email.value.trim(),
+      _subject: 'Nová B2B poptávka z webu Magnetic Events',
+      _replyto: form.elements.email.value.trim()
     };
-    function ok() { form.hidden = true; done.hidden = false; done.scrollIntoView({ behavior: 'smooth', block: 'center' }); }
-
-    if (CONFIG.formEndpoint) {
-      var btn = form.querySelector('button[type=submit]'); btn.disabled = true;
-      fetch(CONFIG.formEndpoint, { method: 'POST', headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' }, body: JSON.stringify(data) })
-        .then(function (r) { if (!r.ok) throw new Error(r.status); ok(); })
-        .catch(function () { btn.disabled = false; show('Odeslání se nepovedlo. Zkuste to prosím znovu nebo nám napište na ' + CONFIG.fallbackEmail + '.'); });
-    } else {
-      var body = Object.keys(data).filter(function (k) { return k.charAt(0) !== '_'; }).map(function (k) { return k + ': ' + data[k]; }).join('\n');
-      location.href = 'mailto:' + CONFIG.fallbackEmail + '?subject=' + encodeURIComponent(data._subject) + '&body=' + encodeURIComponent(body);
-      ok();
-    }
+    var button = form.querySelector('button[type="submit"]');
+    button.disabled = true;
+    button.textContent = 'Odesílání…';
+    fetch(CONFIG.formEndpoint, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+      body: JSON.stringify(data)
+    }).then(function (response) {
+      if (!response.ok) throw new Error('Odeslání selhalo');
+      form.hidden = true;
+      done.hidden = false;
+      done.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }).catch(function () {
+      show('Poptávku se nepodařilo odeslat. Zkuste to znovu nebo napište na ' + CONFIG.fallbackEmail + '.');
+    }).finally(function () {
+      button.disabled = false;
+      button.textContent = 'Odeslat nezávaznou poptávku';
+    });
   });
 })();
 
@@ -132,7 +135,7 @@ var CONFIG = {
     }).catch(function () {
       error.textContent = 'Zprávu se nepodařilo odeslat. Zkuste to znovu nebo napište na ' + CONFIG.fallbackEmail + '.';
       error.hidden = false;
-    }).finally(function () { button.disabled = false; button.textContent = 'Odeslat zprávu'; });
+    }).finally(function () { button.disabled = false; button.textContent = 'Poslat zprávu Tomášovi'; });
   });
 })();
 
