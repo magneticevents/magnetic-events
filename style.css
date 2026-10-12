@@ -226,7 +226,7 @@ header.top{position:relative;z-index:10}
 /* B2B navigace a rozcestník: stávající firemní paleta Magnetic Events */
 nav.links .nav-group{position:relative;display:flex;align-items:center}
 nav.links .nav-group>a{font-size:15px;font-weight:600;display:flex;align-items:center;gap:6px}
-nav.links .nav-group .subnav{position:absolute;top:calc(100% + 8px);left:-18px;min-width:232px;display:none;flex-direction:column;gap:4px;background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:12px;box-shadow:0 20px 50px rgba(0,0,0,.4);z-index:30}
+nav.links .nav-group .subnav{position:absolute;top:100%;left:-18px;min-width:232px;display:none;flex-direction:column;gap:4px;background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:12px;box-shadow:0 20px 50px rgba(0,0,0,.4);z-index:30}
 nav.links .nav-group:hover .subnav,nav.links .nav-group:focus-within .subnav{display:flex}
 nav.links .nav-group .subnav a{padding:12px;border-radius:10px;white-space:nowrap}
 nav.links .nav-group .subnav a:hover,nav.links .nav-group .subnav a:focus-visible{background:var(--bg)}
