@@ -135,7 +135,7 @@ var CONFIG = {
     }).catch(function () {
       error.textContent = 'Zprávu se nepodařilo odeslat. Zkuste to znovu nebo napište na ' + CONFIG.fallbackEmail + '.';
       error.hidden = false;
-    }).finally(function () { button.disabled = false; button.textContent = 'Poslat zprávu Tomášovi'; });
+    }).finally(function () { button.disabled = false; button.textContent = 'Odeslat zprávu'; });
   });
 })();
 
