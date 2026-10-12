@@ -209,7 +209,7 @@ body{overflow-x:hidden}
 /* Mobilní rozbalovací navigace */
 header.top{position:relative;z-index:10}
 .mobile-menu{display:none}
-@media(max-width:820px){
+@media(max-width:1100px){
   header.top{gap:16px;padding-top:16px;padding-bottom:16px}
   header.top>.btn{display:none}
   .mobile-menu{display:block;margin-left:auto}
@@ -256,3 +256,12 @@ nav.links .nav-group .subnav a:hover,nav.links .nav-group .subnav a:focus-visibl
 .service-secondary{margin-top:24px;padding:42px 30px;border:1px solid var(--line);border-radius:24px;background:var(--surface)}
 @media(max-width:1100px){.services-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.service-pillar:last-child{grid-column:1/-1}.service-pillar{min-height:380px}}
 @media(max-width:820px){.hero h1{font-size:clamp(47px,9.4vw,78px)}.hero-stamp{display:none}.services-grid{grid-template-columns:1fr}.service-pillar:last-child{grid-column:auto}.service-pillar{min-height:330px}.service-pillar h3{font-size:clamp(38px,9vw,56px)}.hero-actions{flex-direction:column}.hero-actions .btn{width:100%}.event-types{align-items:flex-start}}
+
+/* Krátká firemní poptávka */
+.request-details{border:1px solid var(--line);border-radius:20px;padding:18px 20px;background:var(--surface)}
+.request-details summary{cursor:pointer;font-size:16px;font-weight:700;line-height:1.4}
+.request-details summary span{display:inline-block;color:var(--muted);font-size:11px;margin-left:10px}
+.request-details-fields{display:grid;gap:16px;padding-top:22px}
+.request-details-fields .field{background:var(--bg)}
+.mobile-links>a.mobile-subitem{padding-left:34px!important;font-size:14px!important;min-height:42px!important;color:var(--soft)}
+@media(min-width:821px) and (max-width:1100px){nav.links{display:none}header.top>.btn{display:none}}
