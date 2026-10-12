@@ -1,11 +1,11 @@
-/* Magnetic Events – GA4 pouze po souhlasu s analytickými cookies.
- * Před nasazením doplňte skutečné Measurement ID (G-...) z GA4.
- * Bez platného ID se skript nespustí a nesbírá žádná data.
+/* Magnetic Events – Google Analytics 4 jen po výslovném souhlasu.
+ * Měřicí ID webového streamu Magnetic Events: G-HKC5TJV83X.
+ * Události odeslání formulářů neobsahují osobní údaje.
  */
 (function () {
   'use strict';
 
-  var measurementId = ''; // TODO: G-XXXXXXXXXX
+  var measurementId = 'G-HKC5TJV83X';
   var enabled = /^G-[A-Z0-9]{6,20}$/.test(measurementId);
   var storageKey = 'magnetic_analytics_consent_v1';
   var selected = null;
