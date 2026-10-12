@@ -89,7 +89,7 @@ var CONFIG = {
       'Datum akce': form.datum.value, 'Počet hostů': form.hosti.value, 'Místo': form.misto.value,
       'Typ akce': (form.querySelector('input[name=typ]:checked') || {}).value || '',
       'Potřebuje': potreba, 'Jméno': form.jmeno.value,
-      'E-mail': form.email.value, 'Zpráva': form.zprava.value,
+      'E-mail': form.email.value.trim(), email: form.email.value.trim(), 'Zpráva': form.zprava.value,
       _subject: 'Poptávka z webu Magnetic Events', _replyto: form.email.value
     };
     function ok() { form.hidden = true; done.hidden = false; done.scrollIntoView({ behavior: 'smooth', block: 'center' }); }
