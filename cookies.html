@@ -23,7 +23,7 @@
 <link rel="icon" href="/favicon.png" type="image/png" sizes="128x128">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml" sizes="any">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/style.css?v=10">
+<link rel="stylesheet" href="/style.css?v=11">
 </head>
 <body>
 <header class="top wrap">
@@ -37,9 +37,9 @@
     <a href="/kontakt.html">Kontakt</a>
   </nav>
   <a class="btn" href="/poptavka.html">Poptat termín</a>
-  <details class="mobile-menu">
-    <summary><span>Menu</span><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="m6 9 6 6 6-6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></summary>
-  <nav class="mobile-links" aria-label="Mobilní navigace">
+  <div class="mobile-menu">
+    <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="mobile-navigation"><span>Menu</span><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="m6 9 6 6 6-6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+  <nav class="mobile-links" id="mobile-navigation" aria-label="Mobilní navigace" hidden>
     <a href="/vybaveni.html">Vybavení</a>
     <a href="/#akce">Akce</a>
     <a href="/#jak">Jak to funguje</a>
@@ -48,7 +48,7 @@
     <a href="/kontakt.html">Kontakt</a>
     <a class="btn" href="/poptavka.html">Poptat termín</a>
   </nav>
-  </details>
+  </div>
 </header>
 <main class="legal wrap"><div class="mono eyebrow lime">Magnetic Events</div><h1>Nastavení cookies</h1>
 <p class="lead">Přehled technologií, které tento web používá.</p>
@@ -74,6 +74,6 @@
     <a href="/osobni-udaje.html">Zpracování osobních údajů</a>
   </nav>
 </footer>
-<script src="/script.js?v=7" defer></script>
+<script src="/script.js?v=8" defer></script>
 </body>
 </html>

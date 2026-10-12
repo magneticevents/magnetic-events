@@ -1,3 +1,37 @@
+/* Mobilní navigace */
+(function () {
+  var menu = document.querySelector('.mobile-menu');
+  if (!menu) return;
+  var toggle = menu.querySelector('.menu-toggle');
+  var links = menu.querySelector('.mobile-links');
+  function setOpen(open, restoreFocus) {
+    toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+    links.hidden = !open;
+    if (restoreFocus) toggle.focus();
+  }
+  toggle.addEventListener('click', function () {
+    setOpen(toggle.getAttribute('aria-expanded') !== 'true');
+  });
+  links.addEventListener('click', function (event) {
+    if (event.target.closest('a')) setOpen(false);
+  });
+  function closeOutside(event) {
+    if (!menu.contains(event.target)) setOpen(false);
+  }
+  document.addEventListener('pointerdown', closeOutside);
+  document.addEventListener('click', closeOutside);
+  document.addEventListener('keydown', function (event) {
+    if (event.key === 'Escape' && toggle.getAttribute('aria-expanded') === 'true') {
+      setOpen(false, true);
+    }
+  });
+  var desktop = window.matchMedia('(min-width: 821px)');
+  function onResize(event) { if (event.matches) setOpen(false); }
+  if (desktop.addEventListener) desktop.addEventListener('change', onResize);
+  else if (desktop.addListener) desktop.addListener(onResize);
+  setOpen(false);
+})();
+
 /* ===== NASTAVENÍ ===== */
 var CONFIG = {
   // Adresa formuláře z Formspree
@@ -102,25 +136,3 @@ var CONFIG = {
   });
 })();
 
-// Mobilní navigace: zavření po výběru, mimo menu a klávesou Escape.
-(function () {
-  var menu = document.querySelector('.mobile-menu');
-  if (!menu) return;
-  var summary = menu.querySelector('summary');
-  menu.addEventListener('click', function (event) {
-    if (event.target.closest('a')) menu.open = false;
-  });
-  document.addEventListener('click', function (event) {
-    if (menu.open && !menu.contains(event.target)) menu.open = false;
-  });
-  document.addEventListener('keydown', function (event) {
-    if (event.key === 'Escape' && menu.open) {
-      menu.open = false;
-      summary.focus();
-    }
-  });
-  var desktop = window.matchMedia('(min-width: 821px)');
-  desktop.addEventListener('change', function (event) {
-    if (event.matches) menu.open = false;
-  });
-})();
