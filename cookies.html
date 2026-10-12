@@ -23,7 +23,7 @@
 <link rel="icon" href="/favicon.png" type="image/png" sizes="128x128">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml" sizes="any">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/style.css?v=12">
+<link rel="stylesheet" href="/style.css?v=13">
 </head>
 <body>
 <header class="top wrap" data-nav-version="2026-10-12-b">
@@ -57,13 +57,39 @@
   </nav>
   </div>
 </header>
-<main class="legal wrap"><div class="mono eyebrow lime">Magnetic Events</div><h1>Nastavení cookies</h1>
-<p class="lead">Přehled technologií, které tento web používá.</p>
-<section><h2>Analytické a marketingové cookies</h2><p><strong>Neaktivní — web je nepoužívá.</strong> Nemáme zapojené měření návštěvnosti, reklamní pixely ani sledování pro marketing. Proto zde nejsou přepínače souhlasu ani cookie lišta.</p></section>
-<section><h2>Technické ukládání</h2><p>Vlastní kód webu neukládá cookies ani údaje do localStorage. Skryté pole ve formuláři pomáhá rozpoznat spam a neukládá nic do vašeho zařízení. Poskytovatelé infrastruktury mohou při poskytování a ochraně svých služeb zpracovávat technické údaje.</p></section>
-<section><h2>Externí služby</h2><p>Web hostuje GitHub Pages. Písma se načítají přes Google Fonts; při načtení se Googlu předávají technické údaje, například IP adresa. Poptávka se po kliknutí na odeslání předává službě Formspree. Podrobnosti najdete v <a href="/osobni-udaje.html">informacích o zpracování osobních údajů</a>.</p></section>
-<section><h2>Jak spravovat údaje v prohlížeči</h2><p>Případné cookies nebo jiná data webových stránek můžete zobrazit a smazat v nastavení soukromí svého prohlížeče. Pokud na web přidáme volitelné sledovací technologie, nejdříve zajistíme možnost udělit nebo odmítnout souhlas.</p></section>
-<p class="legal-date">Aktualizováno 8. října 2026</p></main>
+<main class="legal wrap">
+  <div class="mono eyebrow lime">Magnetic Events</div>
+  <h1>Nastavení cookies</h1>
+  <p class="lead">Analytika je dobrovolná. O jejím zapnutí rozhodujete vy a souhlas můžete kdykoli změnit.</p>
+
+  <section>
+    <h2>Analytické cookies – Google Analytics 4</h2>
+    <p>Po vašem výslovném souhlasu používáme Google Analytics 4 k měření návštěvnosti, prohlížených stránek a úspěšně odeslaných kontaktních a poptávkových formulářů. Tyto údaje nám pomáhají zlepšovat web. Nepředáváme do Analytics jméno, e-mail ani obsah formuláře.</p>
+    <p>Bez souhlasu se měřicí skript Googlu nenačítá a analytické cookies se nevytvářejí. Reklamní a marketingové měření nepoužíváme. Analytické cookies začínající <code>_ga</code> mají na našem webu nastavenou maximální platnost 180 dní.</p>
+    <p>Poskytovatelem je Google Ireland Limited. Data mohou být zpracovávána i mimo Evropský hospodářský prostor; více o tom uvádíme v <a href="/osobni-udaje.html">zásadách ochrany osobních údajů</a> a v <a href="https://policies.google.com/privacy">zásadách Googlu</a>.</p>
+  </section>
+
+  <section aria-labelledby="cookie-settings-heading">
+    <h2 id="cookie-settings-heading">Vaše volba</h2>
+    <p id="analytics-consent-status" class="cookie-consent-status" role="status">Zjišťujeme uložené nastavení…</p>
+    <div class="cookie-settings-actions">
+      <button type="button" class="btn" id="analytics-accept">Povolit analytiku</button>
+      <button type="button" class="btn btn-outline" id="analytics-reject">Odmítnout analytiku</button>
+    </div>
+    <p>Volbu si ukládáme do úložiště prohlížeče (localStorage), abychom se na souhlas neptali při každé návštěvě. Při odvolání souhlasu zastavíme měření a odstraníme analytické cookies, které náš web může smazat.</p>
+  </section>
+
+  <section>
+    <h2>Nezbytné technické zpracování</h2>
+    <p>Web k běžnému fungování nevyžaduje analytické cookies. Provozovatelé hostingu a dalších služeb mohou pro zabezpečení zpracovávat technické údaje. Záznam vaší volby analytiky se ukládá pouze do úložiště tohoto prohlížeče.</p>
+  </section>
+
+  <section>
+    <h2>Další externí služby</h2>
+    <p>Web hostuje GitHub Pages. Fonty načítáme přes Google Fonts, které mohou získávat technické údaje o požadavku. Obsah kontaktních a poptávkových formulářů zpracovává po odeslání služba Formspree. Podrobnosti najdete v <a href="/osobni-udaje.html">informacích o zpracování osobních údajů</a>.</p>
+  </section>
+  <p class="legal-date">Aktualizováno 12. října 2026</p>
+</main>
 <footer class="foot wrap">
   <div>
     <img src="/assets/logo.svg" alt="Magnetic Events" width="175" height="40">
@@ -81,6 +107,7 @@
     <a href="/osobni-udaje.html">Zpracování osobních údajů</a>
   </nav>
 </footer>
-<script src="/script.js?v=10" defer></script>
+<script src="/analytics.js?v=1" defer></script>
+<script src="/script.js?v=11" defer></script>
 </body>
 </html>
