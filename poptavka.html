@@ -3,11 +3,11 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Nezávazná poptávka firemní akce | Magnetic Events</title>
+<title>Poptávka stanů a technického vybavení | Magnetic Events</title>
 <meta name="theme-color" content="#0C0C0D">
-<meta name="description" content="Pošlete stručné zadání a společně připravíme firemní akci. Event management, technická produkce nebo kreativní služby — jednoduše a nezávazně.">
-<meta property="og:title" content="Nezávazná poptávka firemní akce | Magnetic Events">
-<meta property="og:description" content="Stačí stručné zadání. Připravíme návrh řešení na míru vašemu firemnímu eventu.">
+<meta name="description" content="Poptávka pronájmu stanů, pódií, nábytku, oplocení a technického zázemí. Doplňkově grafika a vizualizace.">
+<meta property="og:title" content="Poptávka stanů a technického vybavení | Magnetic Events">
+<meta property="og:description" content="Poptávka pronájmu stanů, pódií, nábytku, oplocení a technického zázemí. Doplňkově grafika a vizualizace.">
 <meta property="og:type" content="website">
 <link rel="canonical" href="https://www.magneticevents.cz/poptavka.html">
 <meta property="og:url" content="https://www.magneticevents.cz/poptavka.html">
@@ -23,7 +23,7 @@
 <link rel="icon" href="/favicon.png" type="image/png" sizes="128x128">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml" sizes="any">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/style.css?v=13">
+<link rel="stylesheet" href="/style.css?v=14">
 </head>
 <body>
 <header class="top wrap" data-nav-version="2026-10-12-b">
@@ -31,9 +31,9 @@
   <nav class="links" aria-label="Hlavní">
     <div class="nav-group"><a href="/#akce" aria-haspopup="true">Služby <span aria-hidden="true">⌄</span></a>
       <div class="subnav" aria-label="Kategorie služeb">
-        <a href="/#produkce">Event Management</a>
+        <a href="/pronajem-stanu.html">Pronájem stanů</a>
         <a href="/vybaveni.html">Technická produkce</a>
-        <a href="/servis.html">Kreativní služby</a>
+        <a href="/servis.html">Grafika a vizualizace</a>
       </div>
     </div>
     <a href="/vybaveni.html">Vybavení</a>
@@ -41,36 +41,35 @@
     <a href="/#onas">O nás</a>
     <a href="/kontakt.html">Kontakt</a>
   </nav>
-  <a class="btn" href="/poptavka.html">Nezávazně poptat akci</a>
+  <a class="btn" href="/poptavka.html">Poptat vybavení</a>
   <div class="mobile-menu">
     <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="mobile-navigation"><span>Menu</span><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="m6 9 6 6 6-6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
   <nav class="mobile-links" id="mobile-navigation" aria-label="Mobilní navigace" hidden>
     <a href="/#akce">Služby</a>
-    <a class="mobile-subitem" href="/#produkce">Event Management</a>
+    <a class="mobile-subitem" href="/pronajem-stanu.html">Pronájem stanů</a>
     <a class="mobile-subitem" href="/vybaveni.html">Technická produkce</a>
-    <a class="mobile-subitem" href="/servis.html">Kreativní služby</a>
+    <a class="mobile-subitem" href="/servis.html">Grafika a vizualizace</a>
     <a href="/vybaveni.html">Vybavení</a>
     <a href="/#realizace">Reference</a>
     <a href="/#onas">O nás</a>
     <a href="/kontakt.html">Kontakt</a>
-    <a class="btn" href="/poptavka.html">Nezávazně poptat akci</a>
+    <a class="btn" href="/poptavka.html">Poptat vybavení</a>
   </nav>
   </div>
 </header>
 <main class="req wrap">
   <div>
     <div class="mono eyebrow lime">Nezávazná poptávka</div>
-    <h1 class="display">Pojďme<br>připravit<br>vaši akci<span class="pink">.</span></h1>
-    <p class="lead">Stačí pár základních informací. Probereme vaše cíle, doporučíme vhodný rozsah služeb a podrobnosti společně doladíme.</p>
+    <h1 class="display">Vybavíme<br>vaši akci<span class="pink">.</span></h1>
+    <p class="lead">Stačí pár základních informací. Napište, jaké vybavení potřebujete, kam a na kdy. Doporučíme sestavu a připravíme nabídku.</p>
     <div class="contact mono"><span data-k="email">[E-MAIL]</span></div>
   </div>
   <div class="panel">
     <form id="poptavka" novalidate>
       <label class="f"><span class="mono">Co pro vás máme zajistit? *</span>
         <select class="field" name="sluzba" required>
-          <option value="Event Management">Kompletní organizace firemní akce</option>
           <option value="Technická produkce">Technika a vybavení</option>
-          <option value="Kreativní služby">Kreativní návrh a grafika</option>
+          <option value="Grafika a vizualizace">Grafika a vizualizace (doplněk)</option>
           <option value="Konzultace">Potřebuji poradit</option>
         </select>
       </label>
@@ -78,7 +77,7 @@
         <label class="f"><span class="mono">Jméno a firma *</span><input class="field" name="jmeno" type="text" autocomplete="name" maxlength="200" placeholder="Jan Novák, ABC s.r.o." required></label>
         <label class="f"><span class="mono">E-mail *</span><input class="field" name="email" type="email" autocomplete="email" maxlength="254" placeholder="jan@firma.cz" required></label>
       </div>
-      <label class="f"><span class="mono">Stručně popište svou akci *</span><textarea class="field" name="zprava" required maxlength="10000" placeholder="Jakou akci plánujete, kde a přibližně kdy? Co potřebujete zajistit?"></textarea></label>
+      <label class="f"><span class="mono">Jaké vybavení potřebujete? *</span><textarea class="field" name="zprava" required maxlength="10000" placeholder="Stany, pódium, pivní sety, elektro, toalety… Napište místo, termín a přibližný počet hostů."></textarea></label>
       <details class="request-details">
         <summary>Upřesnit termín, místo a počet hostů <span class="mono">nepovinné</span></summary>
         <div class="request-details-fields">
@@ -110,7 +109,7 @@
     <a href="/vybaveni.html">Vybavení</a>
     <a href="/poptavka.html">Poptávka</a>
     <a href="/#onas">O nás</a>
-    <a href="/servis.html">Kreativní služby</a>
+    <a href="/servis.html">Grafika a vizualizace</a>
     <a href="/kontakt.html">Kontakt</a>
     <a href="#">Instagram</a>
     <a href="#">Facebook</a>
@@ -119,6 +118,6 @@
   </nav>
 </footer>
 <script src="/analytics.js?v=1" defer></script>
-<script src="/script.js?v=11" defer></script>
+<script src="/script.js?v=12" defer></script>
 </body>
 </html>

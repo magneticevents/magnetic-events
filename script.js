@@ -60,8 +60,8 @@ var CONFIG = {
   var q = new URLSearchParams(location.search);
   var choice = (q.get('sluzba') || '').toLowerCase();
   var chosen = {
-    event: 'Event Management', technika: 'Technická produkce',
-    kreativa: 'Kreativní služby', konzultace: 'Konzultace'
+    event: 'Technická produkce', technika: 'Technická produkce',
+    kreativa: 'Grafika a vizualizace', konzultace: 'Konzultace'
   };
   if (chosen[choice]) form.elements.sluzba.value = chosen[choice];
   else if (q.get('vybaveni')) form.elements.sluzba.value = 'Technická produkce';

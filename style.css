@@ -295,3 +295,7 @@ nav.links .nav-group .subnav a:hover,nav.links .nav-group .subnav a:focus-visibl
   .cookie-actions .btn{padding:0 10px;font-size:13px;min-height:48px;white-space:normal;text-align:center}
 }
 @media(max-width:370px){.cookie-actions{grid-template-columns:1fr}}
+
+/* Rental services: two offerings, stacked on small screens. */
+.services-rental{grid-template-columns:repeat(2,minmax(0,1fr))}
+@media(max-width:820px){.services-rental{grid-template-columns:1fr}}
