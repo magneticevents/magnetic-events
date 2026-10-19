@@ -61,7 +61,7 @@
     if (!enabled) return;
     window['ga-disable-' + measurementId] = false;
     if (initialized) {
-      window.gtag('consent', 'update', { analytics_storage: 'granted' });
+      applyConsent();
       return;
     }
     initialized = true;
