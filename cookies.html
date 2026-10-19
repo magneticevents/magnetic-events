@@ -60,35 +60,42 @@
 <main class="legal wrap">
   <div class="mono eyebrow lime">Magnetic Events</div>
   <h1>Nastavení cookies</h1>
-  <p class="lead">Analytika je dobrovolná. O jejím zapnutí rozhodujete vy a souhlas můžete kdykoli změnit.</p>
+  <p class="lead">Analytika i měření účinnosti reklam jsou dobrovolné. Povolíte jen analytiku, obojí, nebo vše odmítnete. Svou volbu můžete kdykoli změnit.</p>
 
   <section>
     <h2>Analytické cookies – Google Analytics 4</h2>
     <p>Po vašem výslovném souhlasu používáme Google Analytics 4 k měření návštěvnosti, prohlížených stránek a úspěšně odeslaných kontaktních a poptávkových formulářů. Tyto údaje nám pomáhají zlepšovat web. Nepředáváme do Analytics jméno, e-mail ani obsah formuláře.</p>
-    <p>Bez souhlasu se měřicí skript Googlu nenačítá a analytické cookies se nevytvářejí. Reklamní a marketingové měření nepoužíváme. Analytické cookies začínající <code>_ga</code> mají na našem webu nastavenou maximální platnost 180 dní.</p>
+    <p>Bez souhlasu se měřicí skript Googlu nenačítá a analytické cookies se nevytvářejí. Analytické cookies začínající <code>_ga</code> mají na našem webu nastavenou maximální platnost 180 dní.</p>
     <p>Poskytovatelem je Google Ireland Limited. Data mohou být zpracovávána i mimo Evropský hospodářský prostor; více o tom uvádíme v <a href="/osobni-udaje.html">zásadách ochrany osobních údajů</a> a v <a href="https://policies.google.com/privacy">zásadách Googlu</a>.</p>
+  </section>
+
+  <section>
+    <h2>Měření účinnosti reklam – Google Ads</h2>
+    <p>Jen po samostatném souhlasu používáme údaje z Google Analytics také k měření účinnosti reklam Google Ads. Identifikátor kliknutí na reklamu a událost úspěšného odeslání formuláře pomáhají přiřadit poptávku ke kampani a vyhodnotit její náklady. Do měřicích událostí neposíláme jméno, e-mail ani obsah zprávy.</p>
+    <p>Tato volba povoluje analytiku, reklamní úložiště a předání měřicích údajů Googlu pro vyhodnocení reklam. Případné reklamní cookies začínající <code>_gcl_</code> mívají platnost až 90 dní. Personalizace reklam a remarketing zůstávají vypnuté. Bez této volby je reklamní souhlas odmítnutý; dřívější souhlas pouze s analytikou jej nenahrazuje.</p>
   </section>
 
   <section aria-labelledby="cookie-settings-heading">
     <h2 id="cookie-settings-heading">Vaše volba</h2>
     <p id="analytics-consent-status" class="cookie-consent-status" role="status">Zjišťujeme uložené nastavení…</p>
     <div class="cookie-settings-actions">
-      <button type="button" class="btn" id="analytics-accept">Povolit analytiku</button>
-      <button type="button" class="btn btn-outline" id="analytics-reject">Odmítnout analytiku</button>
+      <button type="button" class="btn" id="analytics-accept">Povolit pouze analytiku</button>
+      <button type="button" class="btn" id="analytics-accept-ads">Povolit analytiku i měření reklam</button>
+      <button type="button" class="btn btn-outline" id="analytics-reject">Odmítnout vše</button>
     </div>
-    <p>Volbu si ukládáme do úložiště prohlížeče (localStorage), abychom se na souhlas neptali při každé návštěvě. Při odvolání souhlasu zastavíme měření a odstraníme analytické cookies, které náš web může smazat.</p>
+    <p>Volbu si ukládáme do úložiště prohlížeče (localStorage), abychom se na souhlas neptali při každé návštěvě. Při odvolání příslušného souhlasu zastavíme dané měření a odstraníme analytické či reklamní cookies, které náš web může smazat.</p>
   </section>
 
   <section>
     <h2>Nezbytné technické zpracování</h2>
-    <p>Web k běžnému fungování nevyžaduje analytické cookies. Provozovatelé hostingu a dalších služeb mohou pro zabezpečení zpracovávat technické údaje. Záznam vaší volby analytiky se ukládá pouze do úložiště tohoto prohlížeče.</p>
+    <p>Web k běžnému fungování nevyžaduje analytické cookies. Provozovatelé hostingu a dalších služeb mohou pro zabezpečení zpracovávat technické údaje. Záznam vašich voleb měření se ukládá pouze do úložiště tohoto prohlížeče.</p>
   </section>
 
   <section>
     <h2>Další externí služby</h2>
     <p>Web hostuje GitHub Pages. Fonty načítáme přes Google Fonts, které mohou získávat technické údaje o požadavku. Obsah kontaktních a poptávkových formulářů zpracovává po odeslání služba Formspree. Podrobnosti najdete v <a href="/osobni-udaje.html">informacích o zpracování osobních údajů</a>.</p>
   </section>
-  <p class="legal-date">Aktualizováno 12. října 2026</p>
+  <p class="legal-date">Aktualizováno 19. října 2026</p>
 </main>
 <footer class="foot wrap">
   <div>
@@ -107,7 +114,7 @@
     <a href="/osobni-udaje.html">Zpracování osobních údajů</a>
   </nav>
 </footer>
-<script src="/analytics.js?v=1" defer></script>
+<script src="/analytics.js?v=2" defer></script>
 <script src="/script.js?v=12" defer></script>
 </body>
 </html>
