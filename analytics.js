@@ -1,4 +1,4 @@
-/* Magnetic Events – Google Analytics 4 jen po výslovném souhlasu.
+/* Magnetic Events – Google Analytics 4 a měření reklam jen podle výslovné volby.
  * Měřicí ID webového streamu Magnetic Events: G-HKC5TJV83X.
  * Události odeslání formulářů neobsahují osobní údaje.
  */
@@ -9,24 +9,26 @@
   var enabled = /^G-[A-Z0-9]{6,20}$/.test(measurementId);
   var storageKey = 'magnetic_analytics_consent_v1';
   var selected = null;
+  var adsStorageKey = 'magnetic_ads_measurement_consent_v1';
+  var adsSelected = null;
   var initialized = false;
   var banner = null;
 
-  function readChoice() {
+  function readChoice(key) {
     try {
-      var stored = window.localStorage.getItem(storageKey);
+      var stored = window.localStorage.getItem(key || storageKey);
       return stored === 'accepted' || stored === 'rejected' ? stored : null;
     } catch (e) { return null; }
   }
 
-  function saveChoice(choice) {
-    try { window.localStorage.setItem(storageKey, choice); } catch (e) { /* Souhlas platí jen v aktuální návštěvě. */ }
+  function saveChoice(choice, key) {
+    try { window.localStorage.setItem(key || storageKey, choice); } catch (e) { /* Souhlas platí jen v aktuální návštěvě. */ }
   }
 
-  function clearGaCookies() {
+  function clearCookies(pattern) {
     document.cookie.split(';').forEach(function (pair) {
       var name = pair.split('=')[0].trim();
-      if (!/^_ga(?:_|$)/.test(name)) return;
+      if (!pattern.test(name)) return;
       document.cookie = name + '=; Max-Age=0; path=/; SameSite=Lax';
       document.cookie = name + '=; Max-Age=0; path=/; domain=.magneticevents.cz; SameSite=Lax';
     });
@@ -42,7 +44,17 @@
       ad_user_data: 'denied',
       ad_personalization: 'denied'
     });
-    window.gtag('consent', 'update', { analytics_storage: 'granted' });
+    applyConsent();
+  }
+
+  function applyConsent() {
+    if (!window.gtag) return;
+    window.gtag('consent', 'update', {
+      analytics_storage: selected === 'accepted' ? 'granted' : 'denied',
+      ad_storage: selected === 'accepted' && adsSelected === 'accepted' ? 'granted' : 'denied',
+      ad_user_data: selected === 'accepted' && adsSelected === 'accepted' ? 'granted' : 'denied',
+      ad_personalization: 'denied'
+    });
   }
 
   function startAnalytics() {
@@ -68,70 +80,82 @@
 
   function updateSettings() {
     var status = document.getElementById('analytics-consent-status');
-    if (status) {
-      status.textContent = !enabled
-        ? 'Měření zatím není aktivní.'
-        : selected === 'accepted'
-          ? 'Analytické cookies jsou povolené.'
-          : selected === 'rejected'
-            ? 'Analytické cookies jsou odmítnuté.'
-            : 'Dosud jste nevybrali, zda analytické cookies povolíte.';
-    }
-    var yes = document.getElementById('analytics-accept');
-    var no = document.getElementById('analytics-reject');
-    if (yes) { yes.disabled = !enabled; yes.setAttribute('aria-pressed', selected === 'accepted' ? 'true' : 'false'); }
-    if (no) { no.disabled = !enabled; no.setAttribute('aria-pressed', selected === 'rejected' ? 'true' : 'false'); }
+    if (status) status.textContent = !enabled ? 'Měření zatím není aktivní.' :
+      'Analytika: ' + (selected === 'accepted' ? 'povolena' : selected === 'rejected' ? 'odmítnuta' : 'bez souhlasu') +
+      '. Měření účinnosti reklam: ' + (adsSelected === 'accepted' && selected === 'accepted' ? 'povoleno' : adsSelected === 'rejected' ? 'odmítnuto' : 'bez souhlasu') +
+      '. Personalizovaná reklama je vypnutá.';
+    ['analytics-accept', 'analytics-accept-ads', 'analytics-reject'].forEach(function (id) {
+      var button = document.getElementById(id);
+      if (button) {
+        button.disabled = !enabled;
+        button.setAttribute('aria-pressed', id === 'analytics-accept-ads'
+          ? String(selected === 'accepted' && adsSelected === 'accepted')
+          : id === 'analytics-accept' ? String(selected === 'accepted' && adsSelected !== 'accepted')
+          : String(selected === 'rejected'));
+      }
+    });
   }
 
-  function choose(allow) {
+  function choose(allow, allowAds) {
     if (!enabled) return;
     var wasRejected = selected === 'rejected';
+    var wasInitialized = initialized;
     selected = allow ? 'accepted' : 'rejected';
+    adsSelected = allow && allowAds ? 'accepted' : 'rejected';
     saveChoice(selected);
+    saveChoice(adsSelected, adsStorageKey);
     if (allow) {
       startAnalytics();
-      // Po opětovném povolení ve stejné návštěvě doměřit otevřenou stránku.
-      if (wasRejected && initialized && window.gtag) {
+      if (wasRejected && wasInitialized && window.gtag) {
         window.gtag('event', 'page_view', { page_location: window.location.href });
       }
-    } else {
-      if (initialized && window.gtag) {
-        window.gtag('consent', 'update', { analytics_storage: 'denied' });
-        window['ga-disable-' + measurementId] = true;
-        clearGaCookies();
-      }
+    } else if (initialized && window.gtag) {
+      applyConsent();
+      window['ga-disable-' + measurementId] = true;
+      clearCookies(/^_ga(?:_|$)/);
     }
+    if (adsSelected !== 'accepted') clearCookies(/^_gcl_/);
     if (banner) banner.hidden = true;
     updateSettings();
   }
 
   function showBanner() {
-    if (!enabled || selected) return;
+    if (!enabled || adsSelected !== null) return;
     banner = document.createElement('aside');
     banner.className = 'cookie-banner';
-    banner.setAttribute('aria-label', 'Nastavení analytických cookies');
+    banner.setAttribute('aria-label', 'Nastavení cookies a měření reklam');
     banner.innerHTML =
       '<div class="cookie-banner-content">' +
-      '<div><div class="cookie-title">Pomozte nám vylepšovat web.</div>' +
-      '<p>Používáme volitelné analytické cookies Google Analytics 4 k měření návštěvnosti a zájmu o naše služby. Bez vašeho souhlasu analytiku nespustíme. <a href="/cookies.html">Více o cookies</a>.</p></div>' +
+      '<div><div class="cookie-title">Vyberte si, co nám dovolíte měřit.</div>' +
+      '<p>Volitelně používáme Google Analytics k měření návštěvnosti. Můžete zvlášť povolit i měření účinnosti Google Ads, které spojuje kliknutí na reklamu s odesláním formuláře. Personalizovanou reklamu nepoužíváme. <a href="/cookies.html">Více o cookies</a>.</p></div>' +
       '<div class="cookie-actions">' +
       '<button type="button" class="btn btn-outline" data-cookie-choice="reject">Odmítnout</button>' +
-      '<button type="button" class="btn" data-cookie-choice="accept">Povolit analytiku</button>' +
+      '<button type="button" class="btn btn-outline" data-cookie-choice="accept">Jen analytika</button>' +
+      '<button type="button" class="btn" data-cookie-choice="ads">Povolit i měření reklam</button>' +
       '</div></div>';
     document.body.appendChild(banner);
-    banner.querySelector('[data-cookie-choice="reject"]').addEventListener('click', function () { choose(false); });
-    banner.querySelector('[data-cookie-choice="accept"]').addEventListener('click', function () { choose(true); });
+    banner.querySelector('[data-cookie-choice="reject"]').addEventListener('click', function () { choose(false, false); });
+    banner.querySelector('[data-cookie-choice="accept"]').addEventListener('click', function () { choose(true, false); });
+    banner.querySelector('[data-cookie-choice="ads"]').addEventListener('click', function () { choose(true, true); });
   }
 
   function setup() {
     if (!enabled) { updateSettings(); return; }
     selected = readChoice();
+    adsSelected = readChoice(adsStorageKey);
+    // Dřívější odmítnutí zachovat; starý souhlas s analytikou není souhlas s reklamami.
+    if (selected === 'rejected' && adsSelected === null) {
+      adsSelected = 'rejected';
+      saveChoice(adsSelected, adsStorageKey);
+    }
     if (selected === 'accepted') startAnalytics();
-    else if (!selected) showBanner();
+    showBanner();
 
     var accept = document.getElementById('analytics-accept');
     var reject = document.getElementById('analytics-reject');
+    var acceptAds = document.getElementById('analytics-accept-ads');
     if (accept) accept.addEventListener('click', function () { choose(true); });
+    if (acceptAds) acceptAds.addEventListener('click', function () { choose(true, true); });
     if (reject) reject.addEventListener('click', function () { choose(false); });
     updateSettings();
   }
