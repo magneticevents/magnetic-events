@@ -6,6 +6,9 @@
   'use strict';
 
   var measurementId = 'G-HKC5TJV83X';
+  var adsId = 'AW-18508886463';
+  var adsConversion = adsId + '/ShIyCMOzrKIdEL_j3PlE';
+  var adsConfigured = false;
   var enabled = /^G-[A-Z0-9]{6,20}$/.test(measurementId);
   var storageKey = 'magnetic_analytics_consent_v1';
   var selected = null;
@@ -57,11 +60,18 @@
     });
   }
 
+  function configureAds() {
+    if (adsSelected !== 'accepted' || selected !== 'accepted' || adsConfigured) return;
+    window.gtag('config', adsId, { allow_ad_personalization_signals: false });
+    adsConfigured = true;
+  }
+
   function startAnalytics() {
     if (!enabled) return;
     window['ga-disable-' + measurementId] = false;
     if (initialized) {
       applyConsent();
+      configureAds();
       return;
     }
     initialized = true;
@@ -72,6 +82,7 @@
       allow_google_signals: false,
       cookie_expires: 15552000
     });
+    configureAds();
     var script = document.createElement('script');
     script.async = true;
     script.src = 'https://www.googletagmanager.com/gtag/js?id=' + encodeURIComponent(measurementId);
@@ -166,7 +177,12 @@
     trackFormSuccess: function (type) {
       if (!enabled || selected !== 'accepted' || !initialized || !window.gtag) return;
       if (type === 'kontakt') window.gtag('event', 'contact_form_success');
-      if (type === 'poptavka') window.gtag('event', 'inquiry_form_success');
+      if (type === 'poptavka') {
+        window.gtag('event', 'inquiry_form_success');
+        if (adsSelected === 'accepted') {
+          window.gtag('event', 'conversion', { send_to: adsConversion });
+        }
+      }
     }
   };
 
