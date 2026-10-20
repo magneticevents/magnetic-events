@@ -85,7 +85,11 @@
     configureAds();
     var script = document.createElement('script');
     script.async = true;
-    script.src = 'https://www.googletagmanager.com/gtag/js?id=' + encodeURIComponent(measurementId);
+    // Se samostatným souhlasem s měřením reklam použít přímo AW značku;
+    // gtag('config', measurementId) nadále zajišťuje GA4 v témže skriptu.
+    // Bez reklamního souhlasu se načítá pouze GA4. Bez analytického souhlasu nic.
+    script.src = 'https://www.googletagmanager.com/gtag/js?id=' +
+      encodeURIComponent(adsSelected === 'accepted' ? adsId : measurementId);
     document.head.appendChild(script);
   }
 
