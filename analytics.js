@@ -7,7 +7,6 @@
 
   var measurementId = 'G-HKC5TJV83X';
   var adsId = 'AW-18508886463';
-  var adsConversion = adsId + '/ShIyCMOzrKIdEL_j3PlE';
   var adsConfigured = false;
   var enabled = /^G-[A-Z0-9]{6,20}$/.test(measurementId);
   var storageKey = 'magnetic_analytics_consent_v1';
@@ -181,12 +180,9 @@
     trackFormSuccess: function (type) {
       if (!enabled || selected !== 'accepted' || !initialized || !window.gtag) return;
       if (type === 'kontakt') window.gtag('event', 'contact_form_success');
-      if (type === 'poptavka') {
-        window.gtag('event', 'inquiry_form_success');
-        if (adsSelected === 'accepted') {
-          window.gtag('event', 'conversion', { send_to: adsConversion });
-        }
-      }
+      // Jediná hlavní konverze Google Ads se importuje z GA4 inquiry_form_success.
+      // Starý přímý event "Žádost o nabídku (1)" je archivovaný a neodesílá se.
+      if (type === 'poptavka') window.gtag('event', 'inquiry_form_success');
     }
   };
 
