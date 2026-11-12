@@ -1,0 +1,69 @@
+/* Magnetic Events premium homepage — original logo is kept in /assets/logo.svg. */
+body.home-redesign header.top{max-width:1600px;padding-top:19px;padding-bottom:19px;gap:18px}
+body.home-redesign header.top nav.links{gap:clamp(14px,1.7vw,30px)}
+body.home-redesign header.top img{height:44px;width:auto}
+body.home-redesign header.top .btn{min-height:44px;padding:0 22px;font-size:14px}
+.cinematic-hero{position:relative;isolation:isolate;overflow:hidden;min-height:740px;background:#111215}
+.cinematic-hero__photo{position:absolute;inset:-2%;z-index:-2;background-image:url('/assets/hero-garden-event.webp');background-size:cover;background-position:center 50%;animation:hero-breathe 20s ease-in-out infinite alternate}
+.cinematic-hero__shade{position:absolute;inset:0;z-index:-1;background:linear-gradient(90deg,rgba(9,10,13,.95) 0%,rgba(9,10,13,.82) 23%,rgba(9,10,13,.45) 48%,rgba(9,10,13,.03) 80%),linear-gradient(0deg,rgba(9,10,13,.98) 0%,transparent 40%),linear-gradient(180deg,rgba(9,10,13,.14),transparent 45%)}
+.cinematic-hero__content{max-width:1600px;margin:0 auto;padding:clamp(55px,6vw,96px) 64px 30px;position:relative}
+.cinematic-hero__lead{max-width:800px}
+.cinematic-hero__eyebrow{color:var(--text);font-size:12px;font-weight:600;letter-spacing:.25em;display:flex;align-items:center;gap:18px;margin-bottom:30px}
+.cinematic-hero__eyebrow:before{content:"";display:inline-block;width:48px;height:3px;flex-shrink:0;background:var(--pink);border-radius:4px}
+.cinematic-hero__headline{font-family:'Archivo',sans-serif;font-size:clamp(58px,6.8vw,112px);line-height:.98;letter-spacing:-.045em;font-stretch:normal;font-weight:900;margin:0 0 30px;color:#fff;text-wrap:balance;max-width:840px;text-transform:none}
+.cinematic-hero__subtitle{border-left:4px solid var(--lime);padding:3px 0 3px 22px;max-width:700px;margin:0;font-size:clamp(19px,1.65vw,25px);font-weight:520;line-height:1.45;color:#f4f5f1;text-shadow:0 2px 20px rgba(0,0,0,.5)}
+.cinematic-hero__actions{display:flex;align-items:center;gap:16px;flex-wrap:wrap;margin-top:38px}
+.cinematic-hero__actions .btn{min-height:59px;border-radius:14px;padding:0 26px;box-shadow:0 6px 30px rgba(198,255,61,.18);font-size:17px;gap:15px}
+.cinematic-hero__actions .btn-outline{background:rgba(5,6,8,.4);border:1.5px solid rgba(255,255,255,.88);box-shadow:none;color:#fff;backdrop-filter:blur(12px)}
+.cinematic-hero__actions .btn-outline:hover{background:rgba(255,255,255,.14);border-color:var(--lime);color:var(--lime)}
+.cinematic-hero__actions .symbol{font-size:24px;line-height:1;font-weight:400}
+.cinematic-features{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px;margin-top:clamp(100px,12vw,180px);margin-bottom:0}
+.cinematic-feature{position:relative;display:grid;grid-template-columns:56px 1fr 14px;align-items:center;gap:20px;min-height:146px;padding:24px 22px;border:1px solid rgba(211,215,226,.28);border-radius:20px;background:rgba(19,21,27,.84);backdrop-filter:blur(14px);color:#fff;box-shadow:0 10px 32px rgba(0,0,0,.25);transition:transform .25s ease,border-color .25s ease,background .25s ease}
+.cinematic-feature:hover,.cinematic-feature:focus-visible{color:#fff;transform:translateY(-5px);border-color:var(--lime);background:rgba(24,27,30,.96)}
+.cinematic-feature__icon{color:var(--lime);border-right:1px solid var(--pink);padding-right:14px;height:66px;display:flex;align-items:center;justify-content:center;box-sizing:content-box}
+.cinematic-feature__icon svg{width:49px;height:49px;stroke-width:1.5;stroke:currentColor;fill:none;stroke-linecap:round;stroke-linejoin:round}
+.cinematic-feature__body{min-width:0}
+.cinematic-feature__title{font-size:clamp(19px,1.7vw,28px);line-height:1.15;font-weight:800;letter-spacing:-.02em;margin:0 0 8px}
+.cinematic-feature__desc{font-size:14px;line-height:1.45;color:#d9d9d9;margin:0}
+.cinematic-feature__arrow{font-size:25px;color:var(--lime);align-self:center}
+.home-redesign .ticker{margin-top:0}
+@keyframes hero-breathe{0%{transform:scale(1.025) translate3d(0,0,0)}100%{transform:scale(1.085) translate3d(-.9%,0,0)}}
+@media(max-width:1350px){
+  body.home-redesign header.top{gap:12px}
+  body.home-redesign header.top nav.links{gap:15px}
+  body.home-redesign header.top .btn{padding:0 14px}
+  .cinematic-feature{grid-template-columns:47px minmax(0,1fr) 12px;padding:18px 16px;gap:12px}
+  .cinematic-feature__icon svg{width:40px;height:40px}
+  .cinematic-feature__icon{padding-right:9px}
+  .cinematic-feature__title{font-size:clamp(18px,1.7vw,24px)}
+}
+@media(max-width:1100px){
+  body.home-redesign header.top nav.links{display:none}
+  body.home-redesign header.top>.btn{display:none}
+  .cinematic-hero__content{padding:68px 40px 28px}
+  .cinematic-hero__headline{font-size:clamp(56px,7.6vw,92px)}
+  .cinematic-features{margin-top:90px}
+}
+@media(max-width:820px){
+  body.home-redesign header.top{padding-left:20px;padding-right:20px}
+  body.home-redesign header.top img{height:35px}
+  .cinematic-hero{min-height:0}
+  .cinematic-hero__photo{background-position:62% center;inset:-1.5%}
+  .cinematic-hero__shade{background:linear-gradient(180deg,rgba(8,9,12,.42) 0%,rgba(8,9,12,.74) 35%,rgba(8,9,12,.94) 73%,rgba(8,9,12,.98) 100%),linear-gradient(90deg,rgba(8,9,12,.5),transparent 82%)}
+  .cinematic-hero__content{padding:70px 20px 36px}
+  .cinematic-hero__eyebrow{font-size:10px;letter-spacing:.13em;gap:12px;margin-bottom:22px}
+  .cinematic-hero__eyebrow:before{width:26px}
+  .cinematic-hero__headline{font-size:clamp(42px,11.5vw,72px);margin-bottom:23px;line-height:1.02;letter-spacing:-.047em}
+  .cinematic-hero__subtitle{font-size:17px;line-height:1.45;border-left-width:3px;padding-left:15px}
+  .cinematic-hero__actions{gap:10px;margin-top:27px;flex-direction:column;align-items:stretch}
+  .cinematic-hero__actions .btn{width:100%;min-height:55px;font-size:16px;padding:0 20px}
+  .cinematic-features{grid-template-columns:1fr;gap:10px;margin-top:58px}
+  .cinematic-feature{grid-template-columns:46px minmax(0,1fr) 12px;min-height:102px;padding:18px 16px;border-radius:17px}
+  .cinematic-feature__icon{height:47px}
+  .cinematic-feature__title{font-size:20px;margin-bottom:5px}
+  .cinematic-feature__desc{font-size:13px}
+}
+@media(prefers-reduced-motion:reduce){
+  .cinematic-hero__photo{animation:none;transform:none}
+  .cinematic-feature{transition:none}
+}
