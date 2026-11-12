@@ -44,6 +44,16 @@ var CONFIG = {
   email: 'poptavky@magneticevents.cz'
 };
 
+
+/* Form feedback is localised; Formspree field keys remain in Czech for the inbox workflow. */
+var PAGE_LANG = /^(en|pl)$/.test(document.documentElement.lang) ? document.documentElement.lang : 'cs';
+var FORM_UI = {
+  cs: { sending: 'Odesílání…', requestSubmit: 'Odeslat nezávaznou poptávku', contactSubmit: 'Odeslat zprávu', requestError: 'Poptávku se nepodařilo odeslat. Zkuste to znovu nebo napište na ', contactError: 'Zprávu se nepodařilo odeslat. Zkuste to znovu nebo napište na ' },
+  en: { sending: 'Sending…', requestSubmit: 'Send a no-obligation enquiry', contactSubmit: 'Send message', requestError: 'The enquiry could not be sent. Please try again or email ', contactError: 'The message could not be sent. Please try again or email ' },
+  pl: { sending: 'Wysyłanie…', requestSubmit: 'Wyślij niezobowiązujące zapytanie', contactSubmit: 'Wyślij wiadomość', requestError: 'Nie udało się wysłać zapytania. Spróbuj ponownie lub napisz na ', contactError: 'Nie udało się wysłać wiadomości. Spróbuj ponownie lub napisz na ' }
+};
+var FEEDBACK = FORM_UI[PAGE_LANG];
+
 // vyplnění kontaktů na všech stránkách
 (function () {
   Array.prototype.forEach.call(document.querySelectorAll('[data-k]'), function (el) {
@@ -78,6 +88,7 @@ var CONFIG = {
     show('');
     if (form.elements._gotcha.value || !form.reportValidity()) return;
     var data = {
+      'Jazyk webu': PAGE_LANG.toUpperCase(),
       'Typ služby': form.elements.sluzba.value,
       'Jméno a firma': form.elements.jmeno.value.trim(),
       'E-mail': form.elements.email.value.trim(),
@@ -91,7 +102,7 @@ var CONFIG = {
     };
     var button = form.querySelector('button[type="submit"]');
     button.disabled = true;
-    button.textContent = 'Odesílání…';
+    button.textContent = FEEDBACK.sending;
     fetch(CONFIG.formEndpoint, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
@@ -103,10 +114,10 @@ var CONFIG = {
       done.hidden = false;
       done.scrollIntoView({ behavior: 'smooth', block: 'center' });
     }).catch(function () {
-      show('Poptávku se nepodařilo odeslat. Zkuste to znovu nebo napište na ' + CONFIG.fallbackEmail + '.');
+      show(FEEDBACK.requestError + CONFIG.fallbackEmail + '.');
     }).finally(function () {
       button.disabled = false;
-      button.textContent = 'Odeslat nezávaznou poptávku';
+      button.textContent = FEEDBACK.requestSubmit;
     });
   });
 })();
@@ -125,19 +136,19 @@ var CONFIG = {
     if (form.elements._gotcha.value || !form.reportValidity()) return;
     var button = form.querySelector('button[type="submit"]');
     button.disabled = true;
-    button.textContent = 'Odesílání…';
+    button.textContent = FEEDBACK.sending;
     fetch(CONFIG.formEndpoint, {
       method: 'POST', headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
-      body: JSON.stringify({ 'Jméno': form.elements.jmeno.value.trim(), email: form.elements.email.value.trim(), message: form.elements.zprava.value.trim(), _subject: 'Kontaktní zpráva z webu Magnetic Events', _replyto: form.elements.email.value.trim() })
+      body: JSON.stringify({ 'Jazyk webu': PAGE_LANG.toUpperCase(), 'Jméno': form.elements.jmeno.value.trim(), email: form.elements.email.value.trim(), message: form.elements.zprava.value.trim(), _subject: 'Kontaktní zpráva z webu Magnetic Events', _replyto: form.elements.email.value.trim() })
     }).then(function (response) {
       if (!response.ok) throw new Error('Odeslání selhalo');
       if (window.MagneticAnalytics) window.MagneticAnalytics.trackFormSuccess('kontakt');
       form.hidden = true;
       document.getElementById('kontakt-done').hidden = false;
     }).catch(function () {
-      error.textContent = 'Zprávu se nepodařilo odeslat. Zkuste to znovu nebo napište na ' + CONFIG.fallbackEmail + '.';
+      error.textContent = FEEDBACK.contactError + CONFIG.fallbackEmail + '.';
       error.hidden = false;
-    }).finally(function () { button.disabled = false; button.textContent = 'Odeslat zprávu'; });
+    }).finally(function () { button.disabled = false; button.textContent = FEEDBACK.contactSubmit; });
   });
 })();
 
