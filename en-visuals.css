@@ -1,0 +1,40 @@
+/* English-language product photography, matching the Czech brand design */
+.en-photo-hero{position:relative;isolation:isolate;overflow:hidden;min-height:520px;padding-top:84px;padding-bottom:95px;border-radius:0;background:#121317}
+.en-photo-hero::before{content:"";position:absolute;inset:0;z-index:-2;background-image:var(--en-hero-photo,url('/assets/hero-garden-event.webp'));background-position:center;background-size:cover}
+.en-photo-hero::after{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(90deg,rgba(9,10,12,.93),rgba(9,10,12,.72) 50%,rgba(9,10,12,.13) 100%),linear-gradient(0deg,rgba(9,10,12,.55),transparent 50%)}
+.en-photo-hero h1{font-size:clamp(56px,8vw,104px);max-width:1080px;text-wrap:balance}
+.en-photo-hero .hero-row p{color:#f1f1f1;max-width:660px;font-size:19px;line-height:1.55}
+.en-photo-hero .btn{align-self:flex-start}
+.en-photo-hero .eyebrow{color:var(--lime)}
+.en-photo-section{margin:15px 0 32px;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+.en-photo-section--three{grid-template-columns:repeat(3,minmax(0,1fr))}
+.en-photo-section figure{margin:0;min-width:0;overflow:hidden;border-radius:18px;background:#222;position:relative}
+.en-photo-section img{display:block;width:100%;height:clamp(200px,22vw,310px);object-fit:cover}
+.en-photo-section figcaption{position:absolute;left:0;right:0;bottom:0;color:#fff;padding:25px 18px 14px;background:linear-gradient(transparent,rgba(0,0,0,.88));font-size:14px;font-weight:700}
+.intl-card--photo{overflow:hidden;padding:0!important;background:var(--surface)!important;color:var(--text)!important;border:1px solid var(--line)!important}
+.intl-card--photo img{width:100%;height:205px;object-fit:cover;display:block}
+.intl-card--photo h3{padding:24px 24px 0;margin:0 0 12px}
+.intl-card--photo p{padding:0 24px 28px}
+.en-faq-feature{display:grid;grid-template-columns:2fr 3fr;gap:28px;align-items:start}
+.en-faq-feature figure{margin:0;min-height:390px;position:sticky;top:28px;border-radius:24px;overflow:hidden}
+.en-faq-feature figure img{position:absolute;width:100%;height:100%;object-fit:cover;inset:0}
+.en-faq-feature .intl-faq{min-width:0}
+.en-equipment-visual{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.35fr);gap:34px;align-items:start}
+.en-equipment-visual>figure{margin:0;border-radius:24px;overflow:hidden;position:relative;min-height:300px}
+.en-equipment-visual>figure img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.en-equipment-visual .intl-points{margin:0}
+.en-photo-hero--graphics{--en-hero-photo:url('/assets/reference/interier-lounge-1600.webp')}
+.en-photo-hero--corporate{--en-hero-photo:url('/assets/reference/krnov-namesti-1600.webp')}
+.en-photo-hero--team{--en-hero-photo:url('/assets/reference/hvezdicovy-stan-1600.webp')}
+.en-photo-hero--equipment{--en-hero-photo:url('/assets/reference/bilovec-namesti-1600.webp')}
+@media(max-width:820px){
+ .en-photo-hero{padding-top:58px;padding-bottom:64px;min-height:450px}
+ .en-photo-hero::before{background-position:54% center}
+ .en-photo-hero::after{background:linear-gradient(180deg,rgba(9,10,12,.55),rgba(9,10,12,.87) 58%,rgba(9,10,12,.95))}
+ .en-photo-hero h1{font-size:clamp(43px,10vw,68px)}
+ .en-photo-hero .hero-row p{font-size:17px}
+ .en-photo-section,.en-photo-section--three,.en-faq-feature,.en-equipment-visual{grid-template-columns:1fr}
+ .en-photo-section img{height:230px}
+ .en-faq-feature figure{position:relative;min-height:230px}
+ .en-equipment-visual>figure{min-height:230px}
+}
