@@ -98,6 +98,18 @@
       'Analytika: ' + (selected === 'accepted' ? 'povolena' : selected === 'rejected' ? 'odmítnuta' : 'bez souhlasu') +
       '. Měření účinnosti reklam: ' + (adsSelected === 'accepted' && selected === 'accepted' ? 'povoleno' : adsSelected === 'rejected' ? 'odmítnuto' : 'bez souhlasu') +
       '. Personalizovaná reklama je vypnutá.';
+
+    var lang = document.documentElement.lang;
+    if (status && lang === 'en') {
+      status.textContent = 'Analytics: ' + (selected === 'accepted' ? 'allowed' : selected === 'rejected' ? 'rejected' : 'no consent') +
+        '. Ad measurement: ' + (adsSelected === 'accepted' && selected === 'accepted' ? 'allowed' : adsSelected === 'rejected' ? 'rejected' : 'no consent') +
+        '. Personalised advertising is disabled.';
+    }
+    if (status && lang === 'pl') {
+      status.textContent = 'Analityka: ' + (selected === 'accepted' ? 'dozwolona' : selected === 'rejected' ? 'odrzucona' : 'brak zgody') +
+        '. Pomiar reklam: ' + (adsSelected === 'accepted' && selected === 'accepted' ? 'dozwolony' : adsSelected === 'rejected' ? 'odrzucony' : 'brak zgody') +
+        '. Reklamy spersonalizowane są wyłączone.';
+    }
     ['analytics-accept', 'analytics-accept-ads', 'analytics-reject'].forEach(function (id) {
       var button = document.getElementById(id);
       if (button) {
