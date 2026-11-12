@@ -147,6 +147,36 @@
       '<button type="button" class="btn btn-outline" data-cookie-choice="accept">Jen analytika</button>' +
       '<button type="button" class="btn" data-cookie-choice="ads">Povolit i měření reklam</button>' +
       '</div></div>';
+
+    // Consent options are identical in all languages; only visible copy changes.
+    var lang = document.documentElement.lang;
+    var cookieCopy = {
+      en: {
+        aria: 'Cookie and advertising measurement settings',
+        title: 'Choose what we may measure.',
+        description: 'We optionally use Google Analytics for website traffic statistics. You can also allow Google Ads conversion measurement linking ad clicks to successful form submissions. We do not use personalised advertising.',
+        more: 'More about cookies (Czech)',
+        reject: 'Reject all', analytics: 'Analytics only', ads: 'Allow ad measurement'
+      },
+      pl: {
+        aria: 'Ustawienia plików cookies i pomiaru reklam',
+        title: 'Wybierz, na jakie pomiary wyrażasz zgodę.',
+        description: 'Opcjonalnie używamy Google Analytics do statystyk odwiedzin. Możesz także zezwolić na pomiar skuteczności Google Ads, łączący kliknięcie reklamy z wysłaniem formularza. Nie używamy reklam spersonalizowanych.',
+        more: 'Więcej o cookies (po czesku)',
+        reject: 'Odrzuć wszystko', analytics: 'Tylko analityka', ads: 'Zezwól na pomiar reklam'
+      }
+    };
+    if (cookieCopy[lang]) {
+      var c = cookieCopy[lang];
+      banner.setAttribute('aria-label', c.aria);
+      banner.querySelector('.cookie-title').textContent = c.title;
+      banner.querySelector('.cookie-banner-content p').firstChild.textContent = c.description + ' ';
+      banner.querySelector('.cookie-banner-content p a').textContent = c.more;
+      banner.querySelector('[data-cookie-choice="reject"]').textContent = c.reject;
+      banner.querySelector('[data-cookie-choice="accept"]').textContent = c.analytics;
+      banner.querySelector('[data-cookie-choice="ads"]').textContent = c.ads;
+    }
+
     document.body.appendChild(banner);
     banner.querySelector('[data-cookie-choice="reject"]').addEventListener('click', function () { choose(false, false); });
     banner.querySelector('[data-cookie-choice="accept"]').addEventListener('click', function () { choose(true, false); });
